@@ -108,6 +108,7 @@ COMMANDS = {
     exit_command: ("good bye", "bye", "exit", "end", "close"),
     show_all_command: ("show all", "show"),
     get_phone: ("phone",)
+    days_to_birthday:()
 }
 
 
