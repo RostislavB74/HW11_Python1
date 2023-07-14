@@ -21,10 +21,15 @@ class Phone(Field):
     ...
 
 
+class Birthday(Field):
+    ...
+
+
 class Record:
 
-    def __init__(self, name: Name, phone: Phone = None) -> None:
+    def __init__(self, name: Name, phone: Phone = None, birthday: Birthday = None) -> None:
         self.name = name
+        self.birthday = birthday
         self.phones = []
         if phone:
             if isinstance(phone, str):
@@ -37,6 +42,9 @@ class Record:
             self.phones.append(phone)
             return f"phone {phone} add to contact {self.name}"
         return f"{phone} present in phones of contact {self.name}"
+
+    def day_to_birthday():
+        pass
 
     def change_phone(self, old_phone, new_phone):
         for idx, p in enumerate(self.phones):
