@@ -13,6 +13,10 @@ class Field:
         return str(self)
 
 
+class Birthday(Field):
+    ...
+
+
 class Name(Field):
     ...
 
@@ -51,6 +55,9 @@ class Record:
                 self.phones[idx] = new_phone
                 return f"old phone {old_phone} change to {new_phone}"
         return f"{old_phone} not present in phones of contact {self.name}"
+
+    def days_to_birthday():
+        pass
 
     def __str__(self) -> str:
         return f"{self.name}: {', '.join(str(p) for p in self.phones)}"
