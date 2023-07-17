@@ -1,6 +1,6 @@
 import time, datetime
 from datetime import datetime
-from ab_classes_new import AddressBook, Name, Phone, Record
+from ab_classes_mon import AddressBook, Name, Phone, Record, Birthday
 
 address_book = AddressBook()
 
@@ -30,11 +30,8 @@ def input_error(func):
 def add_contact(*args):
     name = Name(args[0])
     if len(args) == 2:
-        try:
-            birthday = time.strptime(args[1], '%m/%d/%Y')
+    
             
-        except ValueError:
-        
         # name = Name(args[0])
         phone = Phone(args[1])
         rec: Record = address_book.get(str(name))
@@ -42,6 +39,12 @@ def add_contact(*args):
             return rec.add_phone(phone)
         rec = Record(name, phone, birthday)
     if len(args) > 2:
+        try:
+            if datetime.datetime.strptime(args[2], "%d.%m.%Y"):
+                birthday = Birthday(args[2])
+                print(birthday)
+        except ValueError:
+            print('Invalid date!')
         # name = Name(args[0])
         list_phones = []
         rec: Record = address_book.get(str(name))
