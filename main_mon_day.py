@@ -1,4 +1,4 @@
-import time, datetime
+import time
 from datetime import datetime
 from ab_classes_mon import AddressBook, Name, Phone, Record, Birthday
 
@@ -30,8 +30,7 @@ def input_error(func):
 def add_contact(*args):
     name = Name(args[0])
     if len(args) == 2:
-    
-            
+
         # name = Name(args[0])
         phone = Phone(args[1])
         rec: Record = address_book.get(str(name))
@@ -105,7 +104,7 @@ def show_all_command(*args):
 
 
 def days_to_birthday(*args):
-    name=Name(args[0])
+    name = Name(args[0])
     return f"User {address_book.get(str(name))}"
 
 
@@ -130,7 +129,7 @@ COMMANDS = {
     show_all_command: ("show all", "show"),
     days_to_birthday: ("birthday", "bd"),
     get_phone: ("phone ",)
-    
+
 }
 
 

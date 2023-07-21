@@ -22,7 +22,7 @@ class Phone(Field):
 
 
 class Birthday(Field):
-    ...        
+    ...
 
 
 class Record:
@@ -39,10 +39,9 @@ class Record:
             else:
                 self.phones.append(phone)
 
-    def add_birthday(self, birthday: Birthday):
-        #if isinstance(birthday, "%/d.%m.%Y"):
-            pass
-
+    def add_birthday(self, birthday: Birthday = None):
+        # if isinstance(birthday, "%/d.%m.%Y"):
+        pass
 
     def add_phone(self, phone: Phone):
         if isinstance(phone, list):
