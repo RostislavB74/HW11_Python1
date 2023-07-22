@@ -1,4 +1,5 @@
 from ab_classes import AddressBook, Name, Phone, Record, Birthday
+# import bd
 
 address_book = AddressBook()
 
@@ -42,8 +43,8 @@ def add_contact(*args):
         phones = []
         name = Name(args[0])
         for i in range(1, len(args)):
-            if args[i]
-            phones.append(Phone(args[i]))
+            if isinstance(args[i], str):
+                phones.append(Phone(args[i]))
         rec = Record(name, phones)
 
     return address_book.add_record(rec)
@@ -62,7 +63,11 @@ def change_phone(*args):
     return f"No contact {name} in address book"
 
 
+def days_to_birthday(*args):
+    return bd
 # Вийти
+
+
 def exit_command(*args):
     return "Good bye!"
 
@@ -109,9 +114,9 @@ COMMANDS = {
     remove_phone: ("remove", "delete", "del",),
     exit_command: ("good bye", "bye", "exit", "end", "close"),
     show_all_command: ("show all", "show"),
-    days_to_birthday:("birthday", "bday", "bd"),
+    days_to_birthday: ("birthday", "bday", "bd"),
     get_phone: ("phone",)
-    
+
 }
 
 

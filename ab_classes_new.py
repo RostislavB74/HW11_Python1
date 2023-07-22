@@ -1,4 +1,5 @@
 from collections import UserDict
+import time
 
 
 class Field:
@@ -25,18 +26,17 @@ class Phone(Field):
     ...
 
 
-class Birthday(Field):
-    ...        
+class Email(Field):
+    ...
 
 
 class Record:
 
-    def __init__(self, name: Name, phone: Phone = None, birthday: Birthday = None) -> None:
+    def __init__(self, name: Name, phone: Phone = None, birthday: Birthday = None, email: Email = None) -> None:
         self.name = name
         self.phones = []
-        self.birthday = []
-        if birthday:
-            self.birthday.append(birthday)
+        self.birthday = birthday
+        self.email = email
         if phone:
             if isinstance(phone, list):
                 self.phones.extend(phone)
@@ -44,8 +44,9 @@ class Record:
                 self.phones.append(phone)
 
     def add_birthday(self, birthday: Birthday):
-        if isinstance(birthday, "%/d.%m.%Y")
-
+        if isinstance(birthday, time):
+            self.birthday = birthday
+        return self.birthday
 
     def add_phone(self, phone: Phone):
         if isinstance(phone, list):
