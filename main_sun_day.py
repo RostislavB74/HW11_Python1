@@ -1,4 +1,5 @@
-import time, datetime
+import time
+import datetime
 from datetime import datetime
 from ab_classes_new import AddressBook, Name, Phone, Record
 
@@ -32,12 +33,12 @@ def add_contact(*args):
     if len(args) == 2:
         try:
             birthday = time.strptime(args[1], '%m/%d/%Y')
-            
+
         except ValueError:
-        
-        # name = Name(args[0])
-        phone = Phone(args[1])
-        rec: Record = address_book.get(str(name))
+
+            # name = Name(args[0])
+            phone = Phone(args[1])
+            rec: Record = address_book.get(str(name))
         if rec:
             return rec.add_phone(phone)
         rec = Record(name, phone, birthday)
@@ -102,7 +103,7 @@ def show_all_command(*args):
 
 
 def days_to_birthday(*args):
-    name=Name(args[0])
+    name = Name(args[0])
     return f"User {address_book.get(str(name))}"
 
 
@@ -127,7 +128,7 @@ COMMANDS = {
     show_all_command: ("show all", "show"),
     days_to_birthday: ("birthday", "bd"),
     get_phone: ("phone ",)
-    
+
 }
 
 
