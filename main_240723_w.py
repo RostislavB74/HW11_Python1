@@ -157,7 +157,7 @@ def parser(text: str):
 def main():
     while True:
         # with open('contact.txt', 'a') as f:
-        # print(address_book)
+        print(address_book)
         #   f.writelines([data for data in address_book])
         user_input = input(">>>")
         cmd, data = parser(user_input)
