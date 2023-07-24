@@ -10,6 +10,9 @@ def input_error(func):
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
+        except NameError as e:
+            print(
+                f"Give me a name one phone number +380(88)777-77-77")
         except IndexError as e:
             print(
                 f"Give me a name one phone number")
@@ -27,7 +30,7 @@ def input_error(func):
     return wrapper
 
 
-@input_error
+#@input_error
 def add_contact(*args):
     name = Name(args[0])
     if len(args) == 2:
