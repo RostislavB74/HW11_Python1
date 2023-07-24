@@ -23,12 +23,59 @@ class Name(Field):
 
 
 class Phone(Field):
+    def __init__(self, value):
+        self.__value = None
+        self.value = value
+        # print(self.value)
+
+    @property
+    def value(self):
+        return self.__value.group()
+
+    @value.setter
+    def value(self, value):
+        pattern = r"(\+\d{3}\(\d{2}\)\d{3}\-(?:(?:\d{2}\-\d{2})|(?:\d{1}\-\d{3}){1}))"
+        try:
+            self.__value = re.match(pattern, value)
+            # matches = self.__value.finditer(sentence)
+            # for match in matches:
+            # print(self.__value.group())
+
+        except ValueError:
+            return
+
+    def __str__(self):
+        return self.__value.group()
+
+
+class BirthdayError(Exception):
     ...
 
 
 class Birthday(Field):
-    ...
+    def __init__(self, value):
+        self.__value = None
+        self.value = value
+        # print(self.value)
 
+    @property
+    def value(self):
+        return self.__value
+
+    @value.setter
+    def value(self, value):
+        try:
+            if datetime.strptime(value, "%d/%m/%Y"):
+                self.__value = datetime.strptime(value, "%d/%m/%Y")
+        except ValueError:
+            return value
+
+    def __str__(self):
+        return self.__value.strftime("%d/%m/%Y")
+
+
+class Email(Field):
+    ...
 
 class Record:
 
