@@ -1,7 +1,7 @@
 import time
 import datetime
 from datetime import datetime
-from ab_classes_240723_w import AddressBook, Name, Phone, Record
+from ab_classes_240723_w import AddressBook, Name, Phone, Record, Birthday
 
 address_book = AddressBook()
 
@@ -20,7 +20,7 @@ def input_error(func):
             print(
                 f"Give me a name one phone number")
         except UnboundLocalError:
-            print("Contact exists, you can add one number per step")
+            print("Contact exists")
         except ValueError as e:
             print(
                 f"Give me a name one phone number")
@@ -30,21 +30,30 @@ def input_error(func):
     return wrapper
 
 
-#@input_error
+# @input_error
 def add_contact(*args):
     name = Name(args[0])
+    rec: Record = address_book.get(str(name))
+    if rec:
+        return rec.add_phone(phone)
     if len(args) == 2:
-        try:
-            birthday = time.strptime(args[1], '%m/%d/%Y')
-
-        except ValueError:
-
-            # name = Name(args[0])
+        #        rec: Record = address_book.get(str(name))
+        data = Birthday(args[1])
+        print(data.value)
+        if isinstance(data.value, datetime):
+            birthday = data
+            #  print(birthday)
+            if rec:
+                birthday = data
+                return rec.add_birthday(birthday)
+            rec = Record(name, birthday)
+        else:
             phone = Phone(args[1])
-            rec: Record = address_book.get(str(name))
-        if rec:
-            return rec.add_phone(phone)
-        rec = Record(name, phone)
+            # birthday = None
+            rec = Record(name, phone)
+        # print('Invalid date!')
+        # print(type(args[1]))
+
         return address_book.add_record(rec)
     if len(args) > 2:
         # name = Name(args[0])
@@ -62,7 +71,6 @@ def add_contact(*args):
             return address_book.add_record(rec)
     else:
         return "Unknown command"
-
 # змінити
 
 
@@ -148,10 +156,14 @@ def parser(text: str):
 
 def main():
     while True:
+        # with open('contact.txt', 'a') as f:
+        # print(address_book)
+        #   f.writelines([data for data in address_book])
         user_input = input(">>>")
         cmd, data = parser(user_input)
         result = cmd(*data)
         print(result)
+        #
         if cmd == exit_command:
             break
 

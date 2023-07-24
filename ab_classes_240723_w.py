@@ -5,7 +5,6 @@ from datetime import datetime
 from collections import UserDict
 
 
-
 class Field:
 
     def __init__(self, value) -> None:
@@ -81,6 +80,7 @@ class Birthday(Field):
 class Email(Field):
     ...
 
+
 class Record:
 
     def __init__(self, name: Name, phone: Phone = None, birthday: Birthday = None) -> None:
@@ -100,24 +100,9 @@ class Record:
             self.birthday.append(birthday)
 
     def add_phone(self, phone: Phone):
-        # print(self.phones)
-        # if isinstance(phone, list):
-        #     for i in range(len(phone)):
-        #         print(phone[i])
-        #         for p in self.phones:
-        #             print (type(p.value))
-        #             #print(phone[i]== self.phones[p])
-                    
-        #             #if phone[i] not in self.phones:
-        #             #self.phones.extend(phone[i])
-        #     #print(self.phones)
-
-        #     return f"The contact {self.name} was updated"
-        # else:
         if phone.value not in [p.value for p in self.phones]:
             self.phones.append(phone)
             return f"phone {phone} add to contact {self.name}"
-    
         return f"{phone} present in phones of contact {self.name}"
 
     def change_phone(self, old_phone, new_phone):
