@@ -35,6 +35,7 @@ def add_contact(*args):
     name = Name(args[0])
     rec: Record = address_book.get(str(name))
     if rec:
+
         return rec.add_phone(phone)
     if len(args) == 2:
         #        rec: Record = address_book.get(str(name))

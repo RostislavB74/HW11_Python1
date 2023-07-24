@@ -98,6 +98,7 @@ class Record:
     def add_birthday(self, birthday: Birthday):
         if isinstance(birthday, time):
             self.birthday.append(birthday)
+            return f"phone {birthday} add to contact {self.name}"
 
     def add_phone(self, phone: Phone):
         if phone.value not in [p.value for p in self.phones]:
