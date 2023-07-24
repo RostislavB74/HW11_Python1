@@ -41,7 +41,8 @@ def add_contact(*args):
             rec: Record = address_book.get(str(name))
         if rec:
             return rec.add_phone(phone)
-        rec = Record(name, phone, birthday)
+        rec = Record(name, phone)
+        return address_book.add_record(rec)
     if len(args) > 2:
         # name = Name(args[0])
         list_phones = []
@@ -126,6 +127,7 @@ COMMANDS = {
     remove_phone: ("remove ", "delete ", "del ",),
     exit_command: ("good bye", "bye", "exit", "end", "close", "quit"),
     show_all_command: ("show all", "show"),
+    hello: ("hello", "hi"),
     days_to_birthday: ("birthday", "bd"),
     get_phone: ("phone ",)
 

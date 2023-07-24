@@ -109,7 +109,7 @@ COMMANDS = {
     remove_phone: ("remove", "delete", "del",),
     exit_command: ("good bye", "bye", "exit", "end", "close"),
     show_all_command: ("show all", "show"),
-    days_to_birthday:("birthday", "bday", "bd"),
+    #days_to_birthday:("birthday", "bday", "bd"),
     get_phone: ("phone",)
     
 }
