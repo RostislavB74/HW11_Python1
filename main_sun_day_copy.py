@@ -1,7 +1,7 @@
 import time
 import datetime
 from datetime import datetime
-from ab_classes_new import AddressBook, Name, Phone, Record
+from ab_classes_new_copy import AddressBook, Name, Phone, Record
 
 address_book = AddressBook()
 
@@ -12,22 +12,22 @@ def input_error(func):
             return func(*args, **kwargs)
         except IndexError as e:
             print(
-                f"Give me a name one phone number or several phone numbers please")
+                f"{e} Give me a name one phone number")
         except TypeError as e:
             print(
-                f"Give me a name one phone number or several phone numbers please")
+                f"{e} Give me a name one phone number")
         except UnboundLocalError:
             print("Contact exists, you can add one number per step")
         except ValueError as e:
             print(
-                f"Give me a name one phone number or several phone numbers please")
+                f"{e} Give me a name one phone number")
         except AttributeError as e:
             print(
-                f"Give me a name one phone number or several phone numbers please")
+                f"{e} Give me a name one phone number")
     return wrapper
 
 
-#@input_error
+@input_error
 def add_contact(*args):
     name = Name(args[0])
     if len(args) == 2:
