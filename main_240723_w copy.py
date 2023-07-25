@@ -1,6 +1,6 @@
 
 import datetime
-
+from datetime import datetime
 from ab_classes_240723_w import AddressBook, Name, Phone, Record, Birthday
 import csv
 
@@ -35,47 +35,48 @@ def input_error(func):
 def add_contact(*args):
     name = Name(args[0])
     rec: Record = address_book.get(str(name))
-    # if rec:
 
-    # return rec.add_phone(phone)
-    if len(args) == 2:
+    for i in range(1, len(args)):
+        print(args[i])
 
-        data = Birthday(args[1])
-        print(data.value)
-        if isinstance(data.value, datetime):
-            birthday = data
-            print(birthday)
+        if Birthday(args[i]):
+            birthday = Birthday(args[i])
+        # if isinstance(birthday, datetime):
+        # print(birthday.value)
+
             if rec:
                 # birthday = data
                 return rec.add_birthday(birthday)
             rec = Record(name, birthday=birthday)
-        else:
-            phone = Phone(args[1])
-            # birthday = None
-            # rec = Record(name, phone)
+            return address_book.add_record(rec)
+        if Phone(args[i]):
+            phone = Phone(args[i])
+        # birthday = None
+        # rec = Record(name, phone)
             if rec:
                 return rec.add_phone(phone)
             rec = Record(name, phone=phone)
-        # print('Invalid date!')
-        # print(type(args[1]))
-
-        return address_book.add_record(rec)
-    if len(args) > 2:
-        # name = Name(args[0])
-        list_phones = []
-        rec: Record = address_book.get(str(name))
-        if rec:
-            for i in range(1, len(args)):
-                list_phones.append(Phone(args[i]))
-            return rec.add_phone(list_phones)
-        else:
-            for i in range(1, len(args)):
-                list_phones.append(Phone(args[i]))
-            rec = Record(name, list_phones)
-
             return address_book.add_record(rec)
-    else:
-        return "Unknown command"
+    # print('Invalid date!')
+    # print(type(args[1]))
+        else:
+            return "Unknown command"
+
+# if len(args) > 2:
+    #     # name = Name(args[0])
+    #     list_phones = []
+    #     rec: Record = address_book.get(str(name))
+    #     if rec:
+    #         for i in range(1, len(args)):
+    #             list_phones.append(Phone(args[i]))
+    #         return rec.add_phone(list_phones)
+    #     else:
+    #         for i in range(1, len(args)):
+    #             list_phones.append(Phone(args[i]))
+    #         rec = Record(name, list_phones)
+
+    #         return address_book.add_record(rec)
+
 # змінити
 
 
