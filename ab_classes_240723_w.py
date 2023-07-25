@@ -17,6 +17,7 @@ class Field:
     def __repr__(self) -> str:
         return str(self)
 
+
 class Name(Field):
     ...
 
@@ -82,9 +83,9 @@ class Record:
     def __init__(self, name: Name, phone: Phone = None, birthday: Birthday = None) -> None:
         self.name = name
         self.phones = []
-        self.birthday = []
-        if birthday:
-            self.birthday.append(birthday)
+        self.birthday = birthday
+        # if birthday:
+       #    self.birthdays.append(birthday)
         if phone:
             if isinstance(phone, list):
                 self.phones.extend(phone)
@@ -92,12 +93,13 @@ class Record:
                 self.phones.append(phone)
 
     def add_birthday(self, birthday: Birthday):
-        print (birthday)
-        print (self.birthday)
+        # print(birthday)
+        print(self.birthday)
         if self.birthday:
-            self.birthday.append(birthday)
-            return f"birthday {birthday} add to contact {self.name}"
-        return f"{birthday} present in birthday data of contact {self.name}"
+            # self.birthdays.append(birthday)
+            return f"birthday {self.birthday} add to contact {self.name}"
+        return f"{self.birthday} present in birthday data of contact {self.name}"
+
     def add_phone(self, phone: Phone):
         if phone.value not in [p.value for p in self.phones]:
             self.phones.append(phone)
@@ -111,18 +113,17 @@ class Record:
                 return f"old phone {old_phone} change to {new_phone}"
         return f"{old_phone} not present in phones of contact {self.name}"
 
-    def days_to_birthday(birthday):
+    def days_to_birthday(self, birthday: Birthday):
         print(birthday)
         result = main_bd(birthday)
         return result
 
     def __str__(self) -> str:
-        if self.birthday:
-            return f"{self.name}: {', '.join(str(p) for p in self.birthday)}"
-        if self.phones:
-            return f"{self.name}: {', '.join(str(p) for p in self.phones)}"
+        # if self.birthday:
+        #    return f"{self.name}: "
+        # if self.phones:
+        return f"{self.name}: {', '.join(str(p) for p in self.phones)}, {(str(self.birthday))}"
 #    def __str__(self) -> str:
-        
 
     def remove_phone(self, phone):
         for idx, p in enumerate(self.phones):

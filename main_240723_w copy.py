@@ -1,9 +1,9 @@
-import time
+
 import datetime
-from datetime import datetime
-from bd import main_bd
+
 from ab_classes_240723_w import AddressBook, Name, Phone, Record, Birthday
 import csv
+
 address_book = AddressBook()
 
 
@@ -35,24 +35,24 @@ def input_error(func):
 def add_contact(*args):
     name = Name(args[0])
     rec: Record = address_book.get(str(name))
-    #if rec:
+    # if rec:
 
-        #return rec.add_phone(phone)
+    # return rec.add_phone(phone)
     if len(args) == 2:
-        #        rec: Record = address_book.get(str(name))
+
         data = Birthday(args[1])
         print(data.value)
         if isinstance(data.value, datetime):
             birthday = data
             print(birthday)
             if rec:
-                #birthday = data
+                # birthday = data
                 return rec.add_birthday(birthday)
             rec = Record(name, birthday=birthday)
         else:
             phone = Phone(args[1])
             # birthday = None
-                #rec = Record(name, phone)
+            # rec = Record(name, phone)
             if rec:
                 return rec.add_phone(phone)
             rec = Record(name, phone=phone)
@@ -121,9 +121,9 @@ def show_all_command(*args):
 
 def get_days_to_birthday(*args):
     name = Name(args[0])
-    #result = main_bd(address_book.get((Birthday(name))))
-    result = main_bd(address_book.data[name])
-    return result
+    # result = main_bd(address_book.get((Birthday(name))))
+    res: Record = address_book.get(str(name))
+    return res.days_to_birthday(res.birthday)
     # return f"User {address_book.get(str(name))}"
 
 
@@ -164,16 +164,17 @@ def parser(text: str):
 
 def main():
     while True:
-        print(address_book.data.keys())
-        #print(address_book.data.values(Birthday()))
+        # print(address_book.data.keys())
+        # print(address_book.data.values(Birthday()))
         # with open('names.csv', 'w', newline='') as fh:
         #     writer = csv.DictWriter(fh, fieldnames=list(address_book.data(Record())), quoting=csv.QUOTE_NONNUMERIC)
         #     writer.writeheader()
         #     for d in address_book:
-        #         writer.writerow(d)    
+        #         writer.writerow(d)
 
-            # with open('contact.txt', 'a') as f:
-        print(address_book)
+        # with open('contact.txt', 'a') as f:
+
+        # print(address_book)
         #   f.writelines([data for data in address_book])
         user_input = input(">>>")
         cmd, data = parser(user_input)
