@@ -1,6 +1,7 @@
 from collections import UserDict
 import time
 import re
+from bd import main_bd
 from datetime import datetime
 from collections import UserDict
 
@@ -15,11 +16,6 @@ class Field:
 
     def __repr__(self) -> str:
         return str(self)
-
-
-class Birthday(Field):
-    ...
-
 
 class Name(Field):
     ...
@@ -96,10 +92,12 @@ class Record:
                 self.phones.append(phone)
 
     def add_birthday(self, birthday: Birthday):
-        if isinstance(birthday, time):
+        print (birthday)
+        print (self.birthday)
+        if self.birthday:
             self.birthday.append(birthday)
-            return f"phone {birthday} add to contact {self.name}"
-
+            return f"birthday {birthday} add to contact {self.name}"
+        return f"{birthday} present in birthday data of contact {self.name}"
     def add_phone(self, phone: Phone):
         if phone.value not in [p.value for p in self.phones]:
             self.phones.append(phone)
@@ -113,11 +111,18 @@ class Record:
                 return f"old phone {old_phone} change to {new_phone}"
         return f"{old_phone} not present in phones of contact {self.name}"
 
-    def days_to_birthday():
-        pass
+    def days_to_birthday(birthday):
+        print(birthday)
+        result = main_bd(birthday)
+        return result
 
     def __str__(self) -> str:
-        return f"{self.name}: {', '.join(str(p) for p in self.phones)}"
+        if self.birthday:
+            return f"{self.name}: {', '.join(str(p) for p in self.birthday)}"
+        if self.phones:
+            return f"{self.name}: {', '.join(str(p) for p in self.phones)}"
+#    def __str__(self) -> str:
+        
 
     def remove_phone(self, phone):
         for idx, p in enumerate(self.phones):
@@ -132,6 +137,7 @@ class Record:
 class AddressBook(UserDict):
 
     def add_record(self, record: Record):
+        print(record)
         self.data[str(record.name)] = record
         return f"Contact {record} add success"
     # def add_record1(self, record: Record):
