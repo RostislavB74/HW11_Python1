@@ -13,25 +13,25 @@ def input_error(func):
             return func(*args, **kwargs)
         except NameError as e:
             print(
-                f"Give me a name and  phone number in format +380(88)777-77-77")
+                f"Give me a name and phone number in format +380(88)777-77-77 or date birthday dd/mm/YYYY")
         except IndexError as e:
             print(
-                f"Give me a name and  phone number in format +380(88)777-77-77")
+                f"Give me a name and  phone number in format +380(88)777-77-77 or date birthday dd/mm/YYYY")
         except TypeError as e:
             print(
-                f"Give me a name and  phone number in format +380(88)777-77-77")
+                f"Give me a name and  phone number in format +380(88)777-77-77 or date birthday dd/mm/YYYY")
         except UnboundLocalError as e:
             print("Contact exists")
         except ValueError as e:
             print(
-                f"Give me a name and  phone number in format +380(88)777-77-77")
+                f"Give me a name and  phone number in format +380(88)777-77-77 or date birthday dd/mm/YYYY")
         except AttributeError as e:
             print(
-                f"Give me a name and  phone number in format +380(88)777-77-77")
+                f"Give me a name and  phone number in format +380(88)777-77-77 or date birthday dd/mm/YYYY")
     return wrapper
 
 
-# @input_error
+@input_error
 def add_contact(*args):
     name = Name(args[0])
     rec: Record = address_book.get(str(name))
@@ -47,7 +47,9 @@ def add_contact(*args):
                     return rec.add_birthday(birthday)
                 rec = Record(name, birthday=birthday)
         else:
-            phone = Phone(args[1])
+            pattern_ph = r"(\+\d{3}\(\d{2}\)\d{3}\-(?:(?:\d{2}\-\d{2})|(?:\d{1}\-\d{3}){1}))"
+            if re.fullmatch(pattern_ph, args[1]):
+                phone = Phone(args[1])
             if rec:
                 return rec.add_phone(phone)
             rec = Record(name, phone=phone)

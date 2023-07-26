@@ -30,13 +30,15 @@ class Phone(Field):
 
     @property
     def value(self):
-        return self.__value.group()
+        return self.__value
 
     @value.setter
     def value(self, value):
-        pattern = r"(\+\d{3}\(\d{2}\)\d{3}\-(?:(?:\d{2}\-\d{2})|(?:\d{1}\-\d{3}){1}))"
+        # pattern = r"(\+\d{3}\(\d{2}\)\d{3}\-(?:(?:\d{2}\-\d{2})|(?:\d{1}\-\d{3}){1}))"
+        # if re.match(pattern, value):
         try:
-            self.__value = re.match(pattern, value)
+            self.__value = value
+            # print(self.value)
             # matches = self.__value.finditer(sentence)
             # for match in matches:
             # print(self.__value.group())
@@ -45,7 +47,7 @@ class Phone(Field):
             return
 
     def __str__(self):
-        return self.__value.group()
+        return self.__value
 
 
 class BirthdayError(Exception):
