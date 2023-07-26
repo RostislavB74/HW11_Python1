@@ -2,7 +2,7 @@
 import datetime
 from datetime import datetime
 from ab_classes_240723_w import AddressBook, Name, Phone, Record, Birthday
-import re
+import csv
 
 address_book = AddressBook()
 
@@ -31,83 +31,46 @@ def input_error(func):
     return wrapper
 
 
+# def check_args(*args):
+#     if args == Birthday[args]:
+#         birthday = Birthday[args]
+#         return birthday
+#     if args == Phone[args]:
+#         phone = Phone[args]
+#         return phone
+#     else:
+#         return "Unknown comand"
+
 # @input_error
+
+
 def add_contact(*args):
     name = Name(args[0])
     rec: Record = address_book.get(str(name))
-    # if rec:
 
-    #     return rec.add_phone(phone)
-    if len(args) == 2:
-        pattern_bd = r'(\d\d)/(\d\d)/(\d{4})'
-        if re.fullmatch(pattern_bd, args[1]):
-            #        rec: Record = address_book.get(str(name))
-            data = Birthday(args[1])
-        # print(data.value)
-            if isinstance(data.value, datetime):
-                birthday = data
-                #  print(birthday)
-                if rec:
-                    birthday = data
-                    return rec.add_birthday(birthday)
-                rec = Record(name, birthday=birthday)
-        else:
-            phone = Phone(args[1])
-            # birthday = None
-            # rec = Record(name, phone)
+    for i in range(1, len(args)):
+        print(args[i])
+        # result = check_args(args[i])
+        # if args[i] == Birthday[args[i]]:
+        try:
+            birthday = Birthday[args[i]]
+            if rec:
+                # birthday = data
+                return rec.add_birthday(birthday)
+            rec = Record(name, birthday=birthday)
+            return address_book.add_record(rec)
+        except:
+            # if args[i] == Phone[args[i]]:
+            phone = Phone[args[i]]
             if rec:
                 return rec.add_phone(phone)
             rec = Record(name, phone=phone)
-#             return address_book.add_record(rec)
-        # print('Invalid date!')
-        # print(type(args[1]))
-
-        return address_book.add_record(rec)
-    if len(args) > 2:
-        # name = Name(args[0])
-        list_phones = []
-        rec: Record = address_book.get(str(name))
-        if rec:
-            for i in range(1, len(args)):
-                list_phones.append(Phone(args[i]))
-            # return rec.add_phone(list_phones)
-        else:
-            for i in range(1, len(args)):
-                list_phones.append(Phone(args[i]))
-            rec = Record(name, list_phones)
-
-        return address_book.add_record(rec)
-    else:
-        return "Unknown command"
-# def add_contact(*args):
-#     name = Name(args[0])
-#     rec: Record = address_book.get(str(name))
-
-#     for i in range(1, len(args)):
-#         print(args[i])
-
-#         if Birthday(args[i]):
-#             birthday = Birthday(args[i])
-#         # if isinstance(birthday, datetime):
-#         # print(birthday.value)
-
-#             if rec:
-#                 # birthday = data
-#                 return rec.add_birthday(birthday)
-#             rec = Record(name, birthday=birthday)
-#             return address_book.add_record(rec)
-#         if Phone(args[i]):
-#             phone = Phone(args[i])
-#         # birthday = None
-#         # rec = Record(name, phone)
-#             if rec:
-#                 return rec.add_phone(phone)
-#             rec = Record(name, phone=phone)
-#             return address_book.add_record(rec)
-#     # print('Invalid date!')
-#     # print(type(args[1]))
-#         else:
-#             return "Unknown command"
+            return address_book.add_record(rec)
+    # print('Invalid date!')
+    # print(type(args[1]))
+        # else:
+        # except:
+            return "Unknown command"
 
 # if len(args) > 2:
     #     # name = Name(args[0])
@@ -189,14 +152,14 @@ def remove_phone(*args):
 
 # Команди додати, змінити, видалити, вихід, показати все, показати контакт
 COMMANDS = {
-    add_contact: ("add ", "+ ", "1"),
-    change_phone: ("change ", "зміни ", "2"),
-    remove_phone: ("remove ", "delete ", "del ", "-", "3"),
-    exit_command: ("good bye", "bye", "exit", "end", "close", "quit", "0"),
-    show_all_command: ("show all", "show", "4"),
-    hello: ("hello", "hi", "!"),
-    get_days_to_birthday: ("birthday", "bd", "6"),
-    get_phone: ("phone ", "5",)
+    add_contact: ("add ", "+ "),
+    change_phone: ("change ", "зміни "),
+    remove_phone: ("remove ", "delete ", "del ",),
+    exit_command: ("good bye", "bye", "exit", "end", "close", "quit"),
+    show_all_command: ("show all", "show"),
+    hello: ("hello", "hi"),
+    get_days_to_birthday: ("birthday", "bd"),
+    get_phone: ("phone ",)
 
 }
 
