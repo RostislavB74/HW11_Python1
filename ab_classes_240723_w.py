@@ -96,7 +96,7 @@ class Record:
 
     def add_birthday(self, birthday: Birthday):
         # print(birthday)
-        print(self.birthday)
+        # print(self.birthday)
         if not self.birthday:
             self.birthday = birthday
             return f"birthday {self.birthday} add to contact {self.name}"
@@ -167,9 +167,9 @@ class AddressBook(UserDict):
         if result:
             yield "\n".join(result)
 
-    if __name__ == "__main__":
+    # if __name__ == "__main__":
 
-        for page, car in enumerate(.iterator(6), 1):
-            print(f"Page {page}")
-            print()
-            input("For next page press any kay")
+        # for page, car in enumerate(.iterator(6), 1):
+        #     print(f"Page {page}")
+        #     print()
+        #     input("For next page press any kay")

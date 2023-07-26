@@ -109,7 +109,7 @@ def exit_command(*args):
 def get_phone(*args):
     name = Name(args[0])
     res: Record = address_book.get(str(name))
-    print(res)
+    # print(res)
     return f"User {res.name}: {(''.join(res.phones))}"
 
 
