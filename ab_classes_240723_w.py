@@ -118,6 +118,10 @@ class Record:
         result = main_bd(birthday)
         return result
 
+    def get_phones(self):
+        result = self.phones
+        return result
+
     def __str__(self) -> str:
         # if self.birthday:
         #    return f"{self.name}: "

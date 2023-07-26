@@ -105,9 +105,7 @@ def exit_command(*args):
 @input_error
 def get_phone(*args):
     name = Name(args[0])
-    res: Record = address_book.get(str(name))
-    # print(res.phones)
-    return f"User {res.name}: {str(p) for p in res.phones}"
+    return f"User {address_book.get(str(name))}"
 
 
 # Привіт
