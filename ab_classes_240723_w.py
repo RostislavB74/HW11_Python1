@@ -94,11 +94,11 @@ class Record:
 
     def add_birthday(self, birthday: Birthday):
         # print(birthday)
-        # print(self.birthday)
-        if birthday:
-            self.birthdays = birthday
-            return f"birthday {birthday} add to contact {self.name}"
-        return f"{birthday} present in birthday data of contact {self.name}"
+        print(self.birthday)
+        if not self.birthday:
+            self.birthday = birthday
+            return f"birthday {self.birthday} add to contact {self.name}"
+        return f"{self.birthday} allready present in birthday data of contact {self.name}"
 
     def add_phone(self, phone: Phone):
         if phone.value not in [p.value for p in self.phones]:

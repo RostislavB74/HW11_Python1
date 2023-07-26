@@ -42,6 +42,7 @@ def add_contact(*args):
             if isinstance(data.value, datetime):
                 birthday = data
                 if rec:
+                    print(data)
                     birthday = data
                     return rec.add_birthday(birthday)
                 rec = Record(name, birthday=birthday)
@@ -106,8 +107,8 @@ def exit_command(*args):
 def get_phone(*args):
     name = Name(args[0])
     res: Record = address_book.get(str(name))
-    # print(res.phones)
-    return f"User {res.name}: {str(p) for p in res.phones}"
+    print(res)
+    return f"User {res.name}: {(''.join(res.phones))}"
 
 
 # Привіт
@@ -128,7 +129,7 @@ def show_all_command(*args):
 def get_days_to_birthday(*args):
     name = Name(args[0])
     res: Record = address_book.get(str(name))
-    return res.days_to_birthday(res.birthday)
+    return f'Until the next birthday left {res.days_to_birthday(res.birthday)} days'
 
 
 # Видалити

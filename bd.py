@@ -4,7 +4,7 @@ import datetime
 
 
 def main_bd(date):
-    print(date)
+    # print(date)
     # test_date = input("Ввведите дату в формате 'dd-mm-yyyy': ")
     str_date = str(date)
     now = datetime.datetime.now()
@@ -12,7 +12,7 @@ def main_bd(date):
     delta1 = datetime.datetime(now.year, then.month, then.day)
     delta2 = datetime.datetime(now.year+1, then.month, then.day)
     result = ((delta1 if delta1 > now else delta2) - now).days
-    return print(f'Until the next birthday left {result} days')
+    return result
 
 
 if __name__ == "__main__":
