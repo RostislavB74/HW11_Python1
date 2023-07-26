@@ -109,8 +109,8 @@ def exit_command(*args):
 def get_phone(*args):
     name = Name(args[0])
     res: Record = address_book.get(str(name))
-    # print(res)
-    return f"User {res.name}: {(''.join(res.phones))}"
+    # rint(res)
+    return f"User {name}: {(''.join(res.phones))}"
 
 
 # Привіт
@@ -177,6 +177,7 @@ def parser(text: str):
 def main():
     while True:
         user_input = input(">>>")
+
         cmd, data = parser(user_input)
         result = cmd(*data)
         print(result)
