@@ -153,3 +153,23 @@ class AddressBook(UserDict):
 
     def __str__(self) -> str:
         return "\n".join(str(r) for r in self.data.values())
+
+    def iterator(self, n=3):
+        result = []
+        counter = 0
+        for record in self.data:
+            result.append(self.data[record.name])
+            counter += 1
+            if counter >= n:
+                yield "\n".join(result)
+                counter = 0
+                result = []
+        if result:
+            yield "\n".join(result)
+
+    if __name__ == "__main__":
+
+        for page, car in enumerate(.iterator(6), 1):
+            print(f"Page {page}")
+            print()
+            input("For next page press any kay")
