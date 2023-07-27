@@ -75,24 +75,8 @@ def add_contact(*args):
     else:
         return "Unknown command"
 
-# if len(args) > 2:
-    #     # name = Name(args[0])
-    #     list_phones = []
-    #     rec: Record = address_book.get(str(name))
-    #     if rec:
-    #         for i in range(1, len(args)):
-    #             list_phones.append(Phone(args[i]))
-    #         return rec.add_phone(list_phones)
-    #     else:
-    #         for i in range(1, len(args)):
-    #             list_phones.append(Phone(args[i]))
-    #         rec = Record(name, list_phones)
-
-    #         return address_book.add_record(rec)
 
 # змінити
-
-
 @input_error
 def change_phone(*args):
     name = Name(args[0])
@@ -129,11 +113,13 @@ def no_command(*args, **kwargs):
 
 
 # показати все
+@input_error
 def show_all_command(*args):
+    if Record.__name__:
+        return address_book
+    return 
 
-    return address_book
-
-
+# коли день народження
 @input_error
 def get_days_to_birthday(*args):
     name = Name(args[0])
@@ -146,7 +132,7 @@ def get_days_to_birthday(*args):
     return f'{name} until the next birthday left {result} days'
 
 
-# Видалити
+# Видалити телефон
 @input_error
 def remove_phone(*args):
     name = Name(args[0])
@@ -157,7 +143,8 @@ def remove_phone(*args):
     return f"No contact {name} in address book"
 
 
-# Команди додати, змінити, видалити, вихід, показати все, показати контакт
+
+# Команди додати, змінити, видалити телефон, вихід, показати все, показати контакт
 COMMANDS = {
     exit_command: ("good bye", "bye", "exit", "end", "close", "quit", "0"),
     add_contact: ("add ", "+ ", "1"),

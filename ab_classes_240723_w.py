@@ -6,6 +6,7 @@ from datetime import datetime
 from collections import UserDict
 
 
+
 class Field:
 
     def __init__(self, value) -> None:
@@ -129,7 +130,9 @@ class Record:
         # if self.birthday:
         #    return f"{self.name}: "
         # if self.phones:
-        return f"{self.name}: {', '.join(str(p) for p in self.phones)}, {(str(self.birthday))}"
+        #res='{:^20} {:^20} {:^20}'.format(self.name), (','.join(str(p) for p in self.phones)), str(self.birthday)
+        #return res
+        return f"{self.name} : {', '.join(str(p) for p in self.phones)}  {(str(self.birthday))}"
 #    def __str__(self) -> str:
 
     def remove_phone(self, phone):
@@ -140,6 +143,9 @@ class Record:
                 self.phones.remove(self.phones[idx])
                 return f"The phone {old_phone} is deleted"
         return f"{phone} not present in phones of contact {self.name}"
+
+    # def remove_rec(self, name):
+    #     return self.name.clear()              
 
 
 class AddressBook(UserDict):
@@ -174,3 +180,4 @@ class AddressBook(UserDict):
         #     print(f"Page {page}")
         #     print()
         #     input("For next page press any kay")
+#'{:^20} {:^20} {:^20}'.format(self.name), (','.join(str(p) for p in self.phones)), str(self.birthday)
