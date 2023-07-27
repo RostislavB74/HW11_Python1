@@ -182,8 +182,9 @@ def parser(text: str):
 def main():
     while True:
         user_input = input(">>>")
-
+        
         cmd, data = parser(user_input)
+        
         result = cmd(*data)
         print(result)
         if cmd == exit_command:
