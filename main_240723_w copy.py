@@ -58,12 +58,17 @@ def add_contact(*args):
     if len(args) > 2:
         list_phones = []
         rec: Record = address_book.get(str(name))
+        pattern_ph = r"(\+\d{3}\(\d{2}\)\d{3}\-(?:(?:\d{2}\-\d{2})|(?:\d{1}\-\d{3}){1}))"
         if rec:
             for i in range(1, len(args)):
-                list_phones.append(Phone(args[i]))
+                if re.fullmatch(pattern_ph, args[i]):
+                    list_phones.append(Phone(args[i]))
+                else:
+                    continue
         else:
             for i in range(1, len(args)):
-                list_phones.append(Phone(args[i]))
+                if re.fullmatch(pattern_ph, args[i]):
+                    list_phones.append(Phone(args[i]))
             rec = Record(name, list_phones)
 
         return address_book.add_record(rec)
@@ -109,8 +114,8 @@ def exit_command(*args):
 def get_phone(*args):
     name = Name(args[0])
     res: Record = address_book.get(str(name))
-    # rint(res)
-    return f"User {name}: {(''.join(res.phones))}"
+    result = res.get_phones(res)
+    return f"{res.name} : {result}"
 
 
 # Привіт
@@ -125,6 +130,7 @@ def no_command(*args, **kwargs):
 
 # показати все
 def show_all_command(*args):
+
     return address_book
 
 
@@ -153,15 +159,14 @@ def remove_phone(*args):
 
 # Команди додати, змінити, видалити, вихід, показати все, показати контакт
 COMMANDS = {
+    exit_command: ("good bye", "bye", "exit", "end", "close", "quit", "0"),
     add_contact: ("add ", "+ ", "1"),
     change_phone: ("change ", "зміни ", "2"),
     remove_phone: ("remove ", "delete ", "del ", "-", "3"),
-    exit_command: ("good bye", "bye", "exit", "end", "close", "quit", "0"),
     show_all_command: ("show all", "show", "4"),
-    hello: ("hello", "hi", "!"),
+    get_phone: ("phone ", "5"),
     get_days_to_birthday: ("birthday", "bd", "6"),
-    get_phone: ("phone ", "5",)
-
+    hello: ("hello", "hi", "!",)
 }
 
 

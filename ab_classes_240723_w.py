@@ -120,9 +120,10 @@ class Record:
         result = main_bd(birthday)
         return result
 
-    def get_phones(self):
-        result = self.phones
-        return result
+    def get_phones(self,res):
+        result = f"{', '.join(str(p) for p in res.phones)}"
+        return result   
+        #return  f"{self.name}: {', '.join(str(p) for p in self.phones)}
 
     def __str__(self) -> str:
         # if self.birthday:
