@@ -1,10 +1,6 @@
 from collections import UserDict
-import time
-import re
 from bd import main_bd
 from datetime import datetime
-from collections import UserDict
-
 
 
 class Field:
@@ -27,7 +23,6 @@ class Phone(Field):
     def __init__(self, value):
         self.__value = None
         self.value = value
-        # print(self.value)
 
     @property
     def value(self):
@@ -35,14 +30,8 @@ class Phone(Field):
 
     @value.setter
     def value(self, value):
-        # pattern = r"(\+\d{3}\(\d{2}\)\d{3}\-(?:(?:\d{2}\-\d{2})|(?:\d{1}\-\d{3}){1}))"
-        # if re.match(pattern, value):
         try:
             self.__value = value
-            # print(self.value)
-            # matches = self.__value.finditer(sentence)
-            # for match in matches:
-            # print(self.__value.group())
 
         except ValueError:
             return
@@ -59,7 +48,6 @@ class Birthday(Field):
     def __init__(self, value):
         self.__value = None
         self.value = value
-        # print(self.value)
 
     @property
     def value(self):
@@ -87,8 +75,6 @@ class Record:
         self.name = name
         self.phones = []
         self.birthday = birthday
-        # if birthday:
-       #    self.birthdays.append(birthday)
         if phone:
             if isinstance(phone, list):
                 self.phones.extend(phone)
@@ -96,8 +82,6 @@ class Record:
                 self.phones.append(phone)
 
     def add_birthday(self, birthday: Birthday):
-        # print(birthday)
-        # print(self.birthday)
         if not self.birthday:
             self.birthday = birthday
             return f"birthday {self.birthday} add to contact {self.name}"
@@ -117,46 +101,30 @@ class Record:
         return f"{old_phone} not present in phones of contact {self.name}"
 
     def days_to_birthday(self, birthday: Birthday):
-        # print(birthday)
         result = main_bd(birthday)
         return result
 
-    def get_phones(self,res):
+    def get_phones(self, res):
         result = f"{', '.join(str(p) for p in res.phones)}"
-        return result   
-        #return  f"{self.name}: {', '.join(str(p) for p in self.phones)}
+        return result
 
     def __str__(self) -> str:
-        # if self.birthday:
-        #    return f"{self.name}: "
-        # if self.phones:
-        #res='{:^20} {:^20} {:^20}'.format(self.name), (','.join(str(p) for p in self.phones)), str(self.birthday)
-        #return res
         return f"{self.name} : {', '.join(str(p) for p in self.phones)}  {(str(self.birthday))}"
-#    def __str__(self) -> str:
 
     def remove_phone(self, phone):
         for idx, p in enumerate(self.phones):
             if phone.value == p.value:
-                # print(self.phones)
                 old_phone = (self.phones[idx])
                 self.phones.remove(self.phones[idx])
                 return f"The phone {old_phone} is deleted"
         return f"{phone} not present in phones of contact {self.name}"
 
-    # def remove_rec(self, name):
-    #     return self.name.clear()              
-
 
 class AddressBook(UserDict):
 
     def add_record(self, record: Record):
-        # print(record)
         self.data[str(record.name)] = record
         return f"Contact {record} add success"
-    # def add_record1(self, record: Record):
-    #     self.data[str(record.name)] = record
-    #     return f"Contact {record} add success"
 
     def __str__(self) -> str:
         return "\n".join(str(r) for r in self.data.values())
@@ -164,8 +132,8 @@ class AddressBook(UserDict):
     def iterator(self, n=3):
         result = []
         counter = 0
-        for record in self.data:
-            result.append(self.data[record.name])
+        for record in self.data.values():
+            result.append(str(record))
             counter += 1
             if counter >= n:
                 yield "\n".join(result)
@@ -174,10 +142,4 @@ class AddressBook(UserDict):
         if result:
             yield "\n".join(result)
 
-    # if __name__ == "__main__":
-
-        # for page, car in enumerate(.iterator(6), 1):
-        #     print(f"Page {page}")
-        #     print()
-        #     input("For next page press any kay")
-#'{:^20} {:^20} {:^20}'.format(self.name), (','.join(str(p) for p in self.phones)), str(self.birthday)
+# '{:^20} {:^20} {:^20}'.format(self.name), (','.join(str(p) for p in self.phones)), str(self.birthday)

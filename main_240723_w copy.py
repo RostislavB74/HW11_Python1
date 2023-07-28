@@ -1,5 +1,5 @@
 
-import datetime
+# import datetime
 from datetime import datetime
 from ab_classes_240723_w import AddressBook, Name, Phone, Record, Birthday
 import re
@@ -117,9 +117,11 @@ def no_command(*args, **kwargs):
 def show_all_command(*args):
     if Record.__name__:
         return address_book
-    return 
+    return
 
 # коли день народження
+
+
 @input_error
 def get_days_to_birthday(*args):
     name = Name(args[0])
@@ -142,6 +144,16 @@ def remove_phone(*args):
         return rec.remove_phone(phone)
     return f"No contact {name} in address book"
 
+# Видалити запис
+
+
+@input_error
+def delete_record(*args):
+    name = Name(args[0])
+    if name.value in address_book:
+        del address_book[name.value]
+        return f"Contact '{name}' has been deleted from the address book."
+    return f"No contact '{name}' found in the address book."
 
 
 # Команди додати, змінити, видалити телефон, вихід, показати все, показати контакт
@@ -153,6 +165,7 @@ COMMANDS = {
     show_all_command: ("show all", "show", "4"),
     get_phone: ("phone ", "5"),
     get_days_to_birthday: ("birthday", "bd", "6"),
+    delete_record: ("7"),
     hello: ("hello", "hi", "!",)
 }
 
@@ -169,13 +182,21 @@ def parser(text: str):
 def main():
     while True:
         user_input = input(">>>")
-        
-        cmd, data = parser(user_input)
-        
-        result = cmd(*data)
-        print(result)
-        if cmd == exit_command:
-            break
+        if user_input.startswith("pages"):
+            rec_per_page = None
+            try:
+                rec_per_page = int(user_input[len("pages"):].strip())
+            except ValueError:
+                rec_per_page = 3
+            for rec in address_book.iterator(rec_per_page):
+                print(rec)
+                input("For next page press any key")
+        else:
+            cmd, data = parser(user_input)
+            result = cmd(*data)
+            print(result)
+            if cmd == exit_command:
+                break
 
 
 if __name__ == "__main__":
